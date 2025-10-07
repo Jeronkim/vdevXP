@@ -1,0 +1,1003 @@
+body {
+  margin: 0;
+  height: 100vh;
+  background: black;
+  display: flex;
+  justify-content: center;   /* vertical center */
+  align-items: center;       /* horizontal center */
+  flex-direction: column;    /* stack logo + bar */
+}
+
+/* Disable text selection on the whole page */
+body {
+  -webkit-user-select: none; /* Chrome, Safari */
+  -moz-user-select: none;    /* Firefox */
+  -ms-user-select: none;     /* IE/Edge */
+  user-select: none;         /* Standard */
+}
+
+.loading-container {
+  text-align: center;
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 40px;
+}
+
+
+.loading-bar {
+  width: 162px;
+  height: 18px;
+  background: black;
+  border: 1px solid white;
+  overflow: hidden;
+  border-radius: 9px;  /* smoother, more round corners */
+  position: relative;
+  margin: 0 auto;  
+}
+
+.box {
+  width: 10px;
+  height: 12px;  /* fits inside 18px bar */
+  background: linear-gradient(to bottom, #3399ff, #0040ff);
+  border-radius: 2px;
+  box-shadow: 0 0 5px rgba(0, 120, 255, 0.8);
+  position: absolute;
+  top: 3px;  /* centers vertically inside bar (18px - 12px = 6px, /2 = 3px) */
+  animation: move 1.5s linear infinite;
+}
+
+@keyframes move {
+  0%   { transform: translateX(-40px); opacity: 0; }
+  10%  { opacity: 1; }
+  50%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateX(200px); opacity: 0; } /* fits new width */
+}
+
+
+/* stagger start times so they travel like a group */
+.box:nth-child(1) { animation-delay: 0s; }
+.box:nth-child(2) { animation-delay: 0s; left: 13px; }  /* 12px width + 1px gap */
+.box:nth-child(3) { animation-delay: 0s; left: 26px; }  /* stacked tightly */
+
+.copyright {
+  margin-top: 50px;
+  font-size: 0.8rem;
+  color: #aaa;
+}
+
+.start-logo {
+  display: block;
+  height: 260px;
+  width: auto;
+  margin-bottom: 30px; /* space below logo */
+}
+
+.startup-logo {
+  height: 180px;  /* scale as you like */
+  width: auto;
+}
+
+
+.footer {
+  position: absolute;
+  bottom: 50px;  /* moves it up from the edge */
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 40px;
+  font-family: "Tahoma", "Verdana", sans-serif; /* Windows XP font */
+  font-size: 16px;   /* bigger text */
+  color: white;
+}
+
+.footer-left {
+  text-align: left;
+  line-height: 1.5;
+}
+
+.footer-right {
+  text-align: right;
+  font-size: 44px;       /* 2× bigger than before */
+  font-weight: bold;     /* fat, chunky */
+  font-style: italic;    /* slanted */
+  line-height: 1;        /* keep it tight */
+}
+
+.c-mark {
+  font-size: 16px;       /* small © relative to big Portfolio */
+  vertical-align: super; /* proper superscript */
+  margin-left: 4px;      /* little spacing */
+  font-style: normal;    /* © upright */
+}
+
+/* Keep everything smooth by default */
+body, img, .loading-bar, .box {
+  image-rendering: auto; /* no rough pixels */
+}
+
+/* Soft, smooth retro overlay */
+.pixel-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: 
+    linear-gradient(to right, rgba(255,255,255,0.01) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.01) 1px, transparent 1px);
+  background-size: 8px 8px; /* wider spacing = smoother look */
+  z-index: 9999;
+}
+
+/* Quick fade-in */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards;  /* faster */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Fade-out effect */
+.fade-out {
+  animation: fadeOut 1s ease forwards;
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+/* Welcome Page */
+.welcome-screen {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-family: Tahoma, sans-serif;
+  color: white;
+}
+
+.welcome-header {
+  background-color: #0029a7; /* header/footer deep blue */
+  height: 100px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.welcome-header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, transparent, white, transparent);
+}
+
+
+.welcome-footer {
+  background-color: #0029a7; /* deep XP blue */
+  height: 100px;
+  flex-shrink: 0;
+  display: flex;               /* flex container */
+  align-items: center;
+  justify-content: space-between; /* pushes left + right apart */
+  padding: 0 40px;
+  position: relative;
+}
+
+.welcome-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, transparent, white, transparent);
+}
+
+.welcome-message {
+  font-family: Tahoma, sans-serif;
+  font-size: 14px;
+  color: white;
+  text-align: right;
+  max-width: 400px;
+  line-height: 1.4;
+}
+
+.welcome-body {
+  flex: 1;
+  background: #4e77e2; /* body purple-ish blue */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  gap: 160px;
+}
+
+
+.welcome-body::before {
+  content: "";
+  position: absolute;
+  top: 25%;
+  bottom: 25%;
+  left: 50%;
+  width: 2px;
+  opacity: 0.5;
+  background: linear-gradient(to bottom, transparent, #aaa, transparent);
+
+}
+
+.welcome-body.no-divider::before {
+  display: none;
+}
+
+.user-frame {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+
+.user-frame:hover {
+  background: linear-gradient(to right, #0029a7, transparent);
+}
+
+
+.user-avatar {
+  width: 65px;
+  height: 65px;
+  border: 2px solid white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.user-text {
+  display: flex;
+  flex-direction: column;  /* 🔧 stack vertically */
+  align-items: flex-start; /* text aligned left */
+}
+
+.user-name {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  line-height: 1.2;
+}
+
+.user-role {
+  font-size: 14px;
+  color: #e0e0e0;
+  line-height: 1.2;
+  margin-top: 4px;          /* space below name */
+}
+
+.restart-btn {
+  display: flex;          
+  align-items: center;
+  gap: 8px;
+}
+
+.restart-icon {
+  width: 30px;
+  height: auto;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+  cursor: pointer;   /* clickable only on the icon */
+}
+
+.restart-icon:hover {
+  opacity: 1;
+}
+
+.restart-text {
+  font-family: Tahoma, sans-serif;
+  font-size: 16px;
+  color: white; /* always bright */
+  cursor: default;   /* not clickable */
+}
+
+
+.welcome-text {
+  font-family: Tahoma, sans-serif;
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+}
+
+/* Fade-in for big Welcome text */
+.fade-welcome {
+  opacity: 0;
+  animation: welcomeFade 2s ease forwards;
+}
+
+@keyframes welcomeFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.desktop {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  position: relative;
+}
+
+.desktop-wallpaper {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* Taskbar */
+.taskbar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30px;  /* 🔥 cut down to 26px */
+  background: linear-gradient(to top, #245edc, #3a6ee8);
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;   /* child fills full height */
+  font-family: Tahoma, sans-serif;
+  color: white;
+  box-shadow: 0 -2px 4px rgba(0,0,0,0.3);
+  padding: 0;
+}
+
+/* Start button fully flush with taskbar */
+.start-btn {
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  height: 30px;           
+  padding: 0 12px;
+  background: linear-gradient(to bottom, #3aa655, #267f39);
+  cursor: pointer;
+  font-weight: bold;
+
+  /* 🔥 make right edge very round */
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+
+  box-shadow: inset 1px 1px 2px rgba(255,255,255,0.4),
+              inset -1px -1px 2px rgba(0,0,0,0.4);
+}
+
+.start-btn:hover {
+  background: linear-gradient(to bottom, #42b45d, #2e9144);
+}
+
+.start-icon {
+  height: 18px;   /* shrink to fit in 26px bar */
+  margin-right: 6px;
+}
+
+.start-text {
+  color: white;
+  font-size: 13px;
+  line-height: 1;  /* 🔥 prevent vertical misalign */
+}
+
+/* Right side container */
+.taskbar-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding-right: 6px;
+}
+
+/* Clock styled like XP */
+.taskbar-clock {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  font-size: 12px;
+  font-family: Tahoma, sans-serif;
+  color: white;
+
+  /* same background as taskbar so it blends */
+  background: linear-gradient(to top, #245edc, #3a6ee8);
+
+  /* subtle divider line on the left */
+  border-left: 1px solid rgba(255,255,255,0.4);
+}
+
+/* Restart Popup Overlay */
+  .restart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5); /* dark dim */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9998;
+  }
+
+  /* Restart Popup Window */
+  .restart-popup {
+    width: 320px;
+    background: #4e77e2; /* same as welcome body */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.6);
+    animation: fadeIn 0.3s ease;
+    z-index: 9999;
+    font-family: Tahoma, sans-serif;
+  }
+
+  /* Popup Header */
+  .restart-popup-header {
+  background: #0029a7; /* XP dark blue */
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: Tahoma, sans-serif;
+  padding: 8px 12px;
+  height: 32px;               /* fixed height */
+  display: flex;
+  align-items: center;         /* vertical center */
+  justify-content: space-between;
+}
+
+  /* Close button */
+  .restart-popup-close {
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  /* Popup Body */
+  .restart-popup-body {
+    background: #4e77e2;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 14px;
+  }
+
+  /* Popup Footer */
+ .restart-popup-footer {
+    background: #0029a7; /* XP dark blue */
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: Tahoma, sans-serif;
+  padding: 8px 12px;
+  height: 32px;               /* fixed height */
+  display: flex;
+  align-items: center;         /* vertical center */
+  justify-content: space-between;
+}
+
+/* Footer specific tweaks */
+.restart-popup-footer {
+  font-weight: normal; 
+  justify-content: flex-end;   /* push Cancel button to right */
+}
+
+/* Cancel button inside footer */
+.popup-cancel {
+  background: #f0f0f0;
+  border: 1px solid #666;
+  padding: 2px 14px;
+  font-size: 13px;
+  font-family: Tahoma, sans-serif;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.popup-cancel:hover {
+  background: #ddd;
+}
+
+  /* Shutdown Button */
+.shutdown-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.shutdown-icon {
+  width: 30px;
+  height: auto;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+  cursor: pointer;
+}
+
+.shutdown-icon:hover {
+  opacity: 1;
+}
+
+.shutdown-text {
+  font-family: Tahoma, sans-serif;
+  font-size: 16px;
+  color: white; /* always bright */
+  cursor: default;   /* not clickable */
+}
+
+/* Shutdown Popup Overlay */
+.shutdown-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5); /* dark dim */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9998;
+}
+
+/* Shutdown Popup Window */
+.shutdown-popup {
+  width: 320px;
+  background: #4e77e2; /* same as welcome body */
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.6);
+  animation: fadeIn 0.3s ease;
+  z-index: 9999;
+  font-family: Tahoma, sans-serif;
+}
+
+/* Popup Header */
+.shutdown-popup-header {
+  background: #0029a7; /* darker like welcome header */
+  color: white;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Close button */
+.shutdown-popup-close {
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Popup Body */
+.shutdown-popup-body {
+  background: #4e77e2;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* Popup Footer */
+.shutdown-popup-footer {
+  background: #0029a7;
+  padding: 8px;
+  text-align: center;
+  color: white;
+  font-size: 13px;
+}
+
+.popup-options {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+.popup-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.popup-icon {
+  width: 50px;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.popup-icon:hover {
+  opacity: 1;
+}
+
+.popup-text {
+  margin-top: 6px;
+  font-size: 14px;
+  color: white;
+}
+
+/* Dim background when popup idle */
+.dim-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5); /* grey dim */
+  z-index: 9997;               /* below popup(9999), above welcome */
+}
+
+.start-menu {
+  position: absolute;
+  bottom: 26px;
+  left: 0;
+  width: 380px;
+  height: 480px;
+  background: #f0f0f0;
+  /* XP thin beveled border */
+  border: 1px solid #808080;
+  border-top-color: #c0c0c0;
+  border-left-color: #c0c0c0;
+  border-radius: 6px 6px 0 0;
+  /* subtle shadow upwards */
+  box-shadow: 0 -3px 10px rgba(0,0,0,0.45);
+  font-family: Tahoma, sans-serif;
+  display: flex;
+  flex-direction: column;
+  z-index: 9998; /* stays below submenu */
+  overflow: hidden;
+}
+
+
+/* Top user bar */
+.start-menu-top {
+  background: linear-gradient(to bottom, #3a6ea5, #245edc);
+  color: white; 
+  padding: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.start-user {
+  display: flex;
+  align-items: center;
+}
+
+.start-user-pic {
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;  /* smooth corners on the picture frame */
+  border: 2px solid #fff; /* thin white border like XP */
+  box-shadow: 0 0 2px rgba(0,0,0,0.4); /* subtle shadow for depth */
+}
+
+.start-user-name {
+  margin-left: 10px;   /* adds space between avatar and name */
+  font-weight: bold;
+  color: white;        /* keep XP-style white username */
+}
+
+/* Middle content */
+.start-menu-content {
+  display: flex;
+  flex: 1;               /* fill space vertically */
+  min-height: 0;         /* avoid overflow */
+}
+
+
+/* Left column */
+.start-menu-left {
+  flex: 1;
+  background: #ffffff;
+  padding: 4px 6px;      /* slimmer padding */
+  border-right: 1px solid #ccc;
+}
+
+/* Right column */
+.start-menu-right {
+  flex: 1;
+  background: #dbe8f5;
+  padding: 4px 6px;      /* slimmer padding */
+}
+
+/* Items */
+.start-item {
+  display: flex;
+  align-items: center;
+  padding: 3px 5px;      /* smaller padding */
+  margin: 2px 0;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+
+.start-item img {
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
+}
+
+.start-item:hover {
+  background: #316ac5;
+  color: white;
+  border-radius: 3px;
+}
+
+/* Subtitles */
+.item-title {
+  font-size: 13px;
+  font-weight: bold;
+}
+.item-subtitle {
+  font-size: 11px;
+  color: gray;
+}
+
+/* Right column */
+.start-menu-right {
+  flex: 1;
+  background: #dbe8f5;
+  padding: 6px;
+}
+
+.start-menu-right .start-item {
+  font-size: 13px;
+}
+
+/* All Programs link */
+.all-programs {
+  margin-top: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 4px 6px;
+}
+.all-programs:hover {
+  background: #316ac5;
+  color: white;
+  border-radius: 3px;
+}
+.arrow {
+  float: right;
+}
+
+/* Bottom bar */
+.start-menu-bottom {
+  background: #245edc;
+  padding: 6px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.start-menu-bottom button {
+  font-size: 12px;
+  padding: 3px 8px;
+  border: none;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: white;
+}
+
+.start-menu-bottom button img {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+}
+
+.start-logoff {
+  background: #ff9933;
+}
+.start-shutdown {
+  background: #cc0000;
+}
+.start-logoff:hover {
+  background: #ff6600;
+}
+.start-shutdown:hover {
+  background: #990000;
+}
+
+/* Disabled shutdown look */
+.start-shutdown:disabled {
+  background: #666 !important;
+  cursor: not-allowed;
+}
+
+.desktop-icons {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.desktop-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80px;
+  cursor: pointer;
+  padding: 6px;
+  border: 1px solid transparent;
+  border-radius: 2px; /* sharper like XP */
+}
+
+.desktop-icon img {
+  width: 48px;
+  height: 48px;
+}
+
+.desktop-icon span {
+  margin-top: 5px;
+  font-size: 13px;
+  color: white;
+  text-align: center;
+  text-shadow: 1px 1px 2px black;
+}
+
+/* XP-style hover = dim box */
+.desktop-icon:hover {
+  background: rgba(0, 0, 0, 0.3);   /* dim background */
+  border: 1px solid rgba(255, 255, 255, 0.6); /* visible grid outline */
+}
+    
+/* XP Window */
+.xp-window {
+  position: absolute;
+  top: 100px;
+  left: 120px;
+  width: 420px;
+  height: 300px;
+  background: #ece9d8;
+  border: 2px solid #003399;
+  border-radius: 6px;
+  box-shadow: 4px 4px 8px rgba(0,0,0,0.4);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 999;
+  font-family: Tahoma, sans-serif;
+} 
+
+.xp-titlebar {
+  background: linear-gradient(to bottom, #1b5ebd, #0c3c91);
+  color: white;
+  font-weight: bold;
+  height: 26px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  user-select: none;
+  box-shadow: inset 0 1px 0 #62a1ff;
+  font-style: italic;
+}
+
+.xp-title {
+  font-style: italic;
+  text-shadow: 1px 1px 2px black;
+}
+
+/* === Window Controls (Minimize, Maximize, Close) === */
+.xp-controls {
+  display: flex;
+  flex-direction: row;     /* side by side */
+  align-items: center;
+  justify-content: flex-end;
+  gap: 3px;
+  margin-right: 3px;
+}
+
+/* Base style for Minimize & Maximize */
+.xp-controls button {
+  width: 22px;
+  height: 20px;
+  border-radius: 3px;
+  border: 1px solid #003c9d;
+  background: linear-gradient(to bottom, #d0e5ff, #8bb8ff);
+  box-shadow: inset 0 1px 2px rgba(255,255,255,0.6);
+  color: #003c9d;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  padding: 0;
+}
+
+.xp-controls button:hover {
+  background: linear-gradient(to bottom, #a5cdff, #5b95ff);
+}
+
+/* Minimize and Maximize keep gradient look */
+.xp-min,
+.xp-max {
+  background: linear-gradient(to bottom, #d0e5ff, #8bb8ff);
+  border: 1px solid #003c9d;
+  box-shadow: inset 0 0 2px #ffffffcc;
+  color: #003c9d;
+  font-weight: bold;
+}
+
+/* Close button uses full PNG image */
+.xp-controls .xp-close {
+  width: 22px;
+  height: 20px;
+  background: url("../assets/exit.png") center/contain no-repeat;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Override global hover that replaces background */
+.xp-controls .xp-close:hover {
+  background: url("../assets/exit.png") center/contain no-repeat;
+  filter: brightness(1.3);
+}
+
+
+
+/* === Content === */
+.xp-content {
+  flex: 1;
+  background: #ffffff;
+  font-style: italic;
+  text-shadow: 1px 1px 2px black;
+  border-top: 1px solid #999;
+  padding: 10px;
+  overflow: auto;
+  font-size: 13px;
+  color: #000;
+}
+
+
+/* Recently Used Submenu */
+.recent-submenu {
+  width: 180px;
+  background: #f0f0f0;
+  /* XP bevel border */
+  border: 1px solid #808080;
+  border-top-color: #c0c0c0;
+  border-left-color: #c0c0c0;
+  box-shadow: 3px 3px 6px rgba(0,0,0,0.45);
+  font-family: Tahoma, sans-serif;
+  font-size: 13px;
+  z-index: 9999; /* ensure it floats above start menu */
+  margin-left: -2px; /* align border cleanly */
+}
+
+.recent-submenu .start-item {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  cursor: default;
+}
+
+.recent-submenu .start-item img {
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+}
+
+.recent-submenu .start-item:hover {
+  background: linear-gradient(to right, #316ac5, #2a5a9d);
+  color: #fff;
+}
